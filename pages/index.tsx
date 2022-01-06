@@ -23,19 +23,19 @@ export default function Home() {
 		return Math.round(mbPerDay)
 	}
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen py-2">
+		<div className="flex flex-col items-center justify-center min-h-screen">
 			<Head>
 				<title>Data Usage</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main className="flex flex-col items-center w-full flex-1 px-4">
-				<h1 className="text-7xl font-bold flex flex-col">
+			<main className="flex flex-col items-center md:justify-center w-full flex-1 px-4 bg-white dark:bg-gray-900">
+				<h1 className="text-6xl md:text-7xl font-bold flex flex-col dark:text-white">
 					<div>
 						You have <span className='text-gradient first text-8xl'>{getRemainingData()}</span> MB left with
 					</div>
 					<div>
-						<span className='text-gradient second text-8xl'>{getPerDayData()}</span> available per day
+						<span className='text-gradient second text-8xl'>{getPerDayData()}</span> MB available per day
 					</div>
 				</h1>
 			</main>
