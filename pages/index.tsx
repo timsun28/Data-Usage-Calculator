@@ -32,7 +32,7 @@ export default function Home() {
 			<main className="flex flex-col items-center justify-center w-full flex-1 px-4 bg-white dark:bg-gray-900">
 				<h1 className="text-6xl md:text-7xl font-bold flex flex-col dark:text-white">
 					<div>
-						You have <span className='text-gradient first text-8xl'>{getRemainingData()}</span> MB left with
+						You should have <span className='text-gradient first text-8xl'>{getRemainingData()}</span> MB left with
 					</div>
 					<div>
 						<span className='text-gradient second text-8xl'>{getPerDayData()}</span> MB available per day
