@@ -52,7 +52,7 @@ export default function Home() {
 		<div className="flex flex-col items-center justify-center min-h-screen">
 			<Head>
 				<title>Data Usage</title>
-				<link rel="icon" href="/favicon.ico" />
+				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 			</Head>
 			<input type="checkbox" id="active" />
 			<label htmlFor="active" className="menu-btn "><span></span></label>

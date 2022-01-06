@@ -1,35 +1,24 @@
-<p  align="center">
+# Data usage calculator
+This app has been created to calculate how much data the user should have left on the current date of the month. This app assumes your data resets at the end of the month. 
 
-<img  src="https://res.cloudinary.com/ddcg0rzlo/image/upload/v1640340715/nextjs-tailwind-typescript-banner_vslgq4.png"  alt="Next.js TypeScript Starter">
+It uses local storage to store the selected amount of GB and uses service workers to cache the app for offline availability.
 
-</p>
+Feel free to update and tweak how you like it and don't forget to try out the [demo](https://data-usage-v2.vercel.app/)
 
-<br />
+## Why this app? 
+My mobile provider phone app shows me two values when looking at my current usage. The amount of days left until my plan renews and the amount of MB's I had left at that moment. This always had me guessing if at some point during the month I was already over my data usage and should slow down a bit or if I had some spare GB's to use in the rest of the month. 
 
-# Next.js + Tailwind CSS Example
+This is why I built this tool to see at any point in the month to see how many MB's I should have left to be on track for the month.
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## Technologies used
+* [NextJS](https://nextjs.org/)
+* [TailwindCSS](https://tailwindcss.com/)
 
-## Preview
+## How to run locally
+You can deploy your own version by clicking this button: 
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftimsun28%2Fdata-usage-v2)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+If you want to run it on your own machine, clone the project on your own machine and run npm install to get all the dependencies.
+Once installed: npm run dev should start the dev environment on your computer where you can access the site on localhost:3000
 
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
