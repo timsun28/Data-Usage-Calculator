@@ -41,6 +41,9 @@ export default function Home() {
 			setGbAvailable(gbAvailable + 1);
 			window.localStorage.setItem('gbAvailable', (gbAvailable + 1).toString());
 		} else {
+			if (gbAvailable === 0) {
+				return;
+			}
 			setGbAvailable(gbAvailable - 1);
 			window.localStorage.setItem('gbAvailable', (gbAvailable - 1).toString());
 		}
