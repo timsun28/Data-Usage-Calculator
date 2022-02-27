@@ -66,7 +66,7 @@ export default function Home() {
             <div className="wrapper" onClick={() => setEditingGb(false)}>
                 <div className="flex h-full text-4xl items-center justify-center gap-8 text-white dark:bg-gray-900">
                     <span>
-                        Bundle size:
+                        Data:
                         {editingGb ? (
                             <input
                                 type={"number"}
