@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
     const [gbAvailable, setGbAvailable] = useState(0);
-    const [editingGb, setEditingGb] = useState(false);
     useEffect(() => {
         if (typeof window !== "undefined") {
             const available = window.localStorage.getItem("gbAvailable");
@@ -63,25 +62,17 @@ export default function Home() {
                 <span></span>
             </label>
             <label htmlFor="active" className="close"></label>
-            <div className="wrapper" onClick={() => setEditingGb(false)}>
-                <div className="flex h-full text-4xl items-center justify-center gap-8 text-white dark:bg-gray-900">
+            <div className="wrapper">
+                <div className="flex h-full text-4xl items-center justify-center gap-8 text-white bg-gray-900">
                     <span>
                         Data:
-                        {editingGb ? (
-                            <input
+						<input
                                 type={"number"}
                                 value={gbAvailable}
-                                className="bg-black w-24"
+                                className="bg-gray-900 w-24 border-2 border-white rounded-lg px-2 mx-2"
 								onClick={(e) => e.stopPropagation()}
                                 onChange={(e) => setGbAvailable(parseInt(e.target.value, 10))}
-                                onBlur={(e) => setEditingGb(false)}
                             />
-                        ) : (
-                            <span onClick={(e) => {
-								e.stopPropagation();
-								setEditingGb(true)
-							}}>{gbAvailable}</span>
-                        )}
                         GB
                     </span>
                     <div className="flex flex-col gap-4">
