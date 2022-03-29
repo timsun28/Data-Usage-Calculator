@@ -1,8 +1,11 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import SettingsButton from "../components/SettingsButton";
+import SettingsWrapper from "../components/SettingsWrapper";
 
 export default function Home() {
     const [gbAvailable, setGbAvailable] = useState(0);
+    const [startDate, setStartDate] = useState(1);
     useEffect(() => {
         if (typeof window !== "undefined") {
             const available = window.localStorage.getItem("gbAvailable");
@@ -12,8 +15,20 @@ export default function Home() {
                 window.localStorage.setItem("gbAvailable", "40");
                 setGbAvailable(40);
             }
+
+            const start = window.localStorage.getItem("startDate");
+			if (start) {
+				setStartDate(parseInt(start));
+			} else {
+				window.localStorage.setItem("startDate", "1");
+				setStartDate(1);
+			}
         }
     }, []);
+
+	
+
+	
 
     const getRemainingData = () => {
         const today = new Date();
@@ -57,30 +72,14 @@ export default function Home() {
                     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
                 />
             </Head>
-            <input type="checkbox" id="active" />
-            <label htmlFor="active" className="menu-btn ">
-                <span></span>
-            </label>
-            <label htmlFor="active" className="close"></label>
-            <div className="wrapper">
-                <div className="flex h-full text-4xl items-center justify-center gap-8 text-white bg-gray-900">
-                    <span>
-                        Data:
-						<input
-                                type={"number"}
-                                value={gbAvailable}
-                                className="bg-gray-900 w-24 border-2 border-white rounded-lg px-2 mx-2"
-								onClick={(e) => e.stopPropagation()}
-                                onChange={(e) => setGbAvailable(parseInt(e.target.value, 10))}
-                            />
-                        GB
-                    </span>
-                    <div className="flex flex-col gap-4">
-                        <span className="chevron top cursor-pointer" onClick={() => updateAvailable("up")}></span>
-                        <span className="chevron bottom cursor-pointer" onClick={() => updateAvailable("down")}></span>
-                    </div>
-                </div>
-            </div>
+            <SettingsButton />
+            <SettingsWrapper
+                gbAvailable={gbAvailable}
+                setGbAvailable={setGbAvailable}
+                updateAvailable={updateAvailable}
+				startDate={startDate}
+				setStartDate={setStartDate}
+            />
             <main className="flex flex-col items-center justify-center w-full flex-1 px-4 bg-white dark:bg-gray-900">
                 <h1 className="text-6xl md:text-7xl font-bold flex flex-col dark:text-white">
                     <div>
