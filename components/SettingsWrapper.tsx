@@ -19,35 +19,35 @@ export default function SettingsWrapper(props: SettingsWrapperProps) {
     }
     return (
         <div className="wrapper">
-            <div className="h-full flex flex-col gap-y-8 items-center justify-center  bg-gray-900 text-white">
-                <div className="flex text-4xl items-center justify-center gap-8 ">
+            <div className="flex flex-col items-center justify-center h-full text-white bg-gray-900 gap-y-8">
+                <div className="flex items-center justify-center gap-8 text-4xl ">
                     <span>
                         Data:
                         <input
                             type={"number"}
                             value={props.gbAvailable}
-                            className="bg-gray-900 w-24 border-2 border-white rounded-lg px-2 mx-2"
+                            className="w-24 px-2 mx-2 bg-gray-900 border-2 border-white rounded-lg"
                             onChange={(e) => props.setGbAvailable(parseInt(e.target.value, 10))}
                         />
                         GB
                     </span>
                     {/* <div className="flex flex-col gap-4">
-                        <span className="chevron top cursor-pointer" onClick={() => props.updateAvailable("up")}></span>
+                        <span className="cursor-pointer chevron top" onClick={() => props.updateAvailable("up")}></span>
                         <span
-                            className="chevron bottom cursor-pointer"
+                            className="cursor-pointer chevron bottom"
                             onClick={() => props.updateAvailable("down")}
                         ></span>
                     </div> */}
                 </div>
-                <span className="text-4xl flex items-center justify-center">
+                {/* <span className="flex items-center justify-center text-4xl">
                     Renewal day:
                     <input
                         type={"number"}
                         value={props.startDate}
-                        className="bg-gray-900 w-24 border-2 border-white rounded-lg px-2 mx-2"
+                        className="w-24 px-2 mx-2 bg-gray-900 border-2 border-white rounded-lg"
                         onChange={(e) => props.setStartDate(parseInt(e.target.value, 10))}
                     />
-                </span>
+                </span> */}
             </div>
         </div>
     );
