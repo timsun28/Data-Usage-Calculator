@@ -17,18 +17,14 @@ export default function Home() {
             }
 
             const start = window.localStorage.getItem("startDate");
-			if (start) {
-				setStartDate(parseInt(start));
-			} else {
-				window.localStorage.setItem("startDate", "1");
-				setStartDate(1);
-			}
+            if (start) {
+                setStartDate(parseInt(start));
+            } else {
+                window.localStorage.setItem("startDate", "1");
+                setStartDate(1);
+            }
         }
     }, []);
-
-	
-
-	
 
     const getRemainingData = () => {
         const today = new Date();
@@ -77,11 +73,11 @@ export default function Home() {
                 gbAvailable={gbAvailable}
                 setGbAvailable={setGbAvailable}
                 updateAvailable={updateAvailable}
-				startDate={startDate}
-				setStartDate={setStartDate}
+                startDate={startDate}
+                setStartDate={setStartDate}
             />
-            <main className="flex flex-col items-center justify-center w-full flex-1 px-4 bg-white dark:bg-gray-900">
-                <h1 className="text-6xl md:text-7xl font-bold flex flex-col dark:text-white">
+            <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white dark:bg-gray-900">
+                <h1 className="flex flex-col text-6xl font-bold md:text-7xl dark:text-white">
                     <div>
                         You should have <span className="text-gradient first text-8xl">{getRemainingData()}</span> MB
                         left with
