@@ -6,15 +6,15 @@ interface SettingsWrapperProps {
     setStartDate: (startDate: number) => void;
 }
 
-export default function SettingsWrapper(props: SettingsWrapperProps) {
+export default function SettingsWrapper({ gbAvailable, updateAvailable, setGbAvailable, startDate, setStartDate }: SettingsWrapperProps) {
     function updateStartDate(event: React.ChangeEvent<HTMLInputElement>) {
         const updateDate = parseInt(event.target.value);
         if (updateDate < 1) {
-            props.setStartDate(1);
+            setStartDate(1);
         } else if (updateDate > 31) {
-            props.setStartDate(31);
+            setStartDate(31);
         } else {
-            props.setStartDate(updateDate);
+            setStartDate(updateDate);
         }
     }
     return (
@@ -25,17 +25,20 @@ export default function SettingsWrapper(props: SettingsWrapperProps) {
                         Data:
                         <input
                             type={"number"}
-                            value={props.gbAvailable}
+                            value={gbAvailable}
                             className="w-24 px-2 mx-2 bg-gray-900 border-2 border-white rounded-lg"
-                            onChange={(e) => props.setGbAvailable(parseInt(e.target.value, 10))}
+                            onChange={(e) => { 
+                                setGbAvailable(parseInt(e.target.value, 10)) 
+                                window.localStorage.setItem("gbAvailable", e.target.value)
+                            }}
                         />
                         GB
                     </span>
                     {/* <div className="flex flex-col gap-4">
-                        <span className="cursor-pointer chevron top" onClick={() => props.updateAvailable("up")}></span>
+                        <span className="cursor-pointer chevron top" onClick={() => updateAvailable("up")}></span>
                         <span
                             className="cursor-pointer chevron bottom"
-                            onClick={() => props.updateAvailable("down")}
+                            onClick={() => updateAvailable("down")}
                         ></span>
                     </div> */}
                 </div>
@@ -43,9 +46,9 @@ export default function SettingsWrapper(props: SettingsWrapperProps) {
                     Renewal day:
                     <input
                         type={"number"}
-                        value={props.startDate}
+                        value={startDate}
                         className="w-24 px-2 mx-2 bg-gray-900 border-2 border-white rounded-lg"
-                        onChange={(e) => props.setStartDate(parseInt(e.target.value, 10))}
+                        onChange={(e) => setStartDate(parseInt(e.target.value, 10))}
                     />
                 </span> */}
             </div>
