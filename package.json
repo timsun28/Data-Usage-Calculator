@@ -3,7 +3,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "test": "jest"
     },
     "dependencies": {
         "next": "^13.4.4",
@@ -22,3 +23,4 @@
         "typescript": "^5.0.4"
     }
 }
+
