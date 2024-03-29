@@ -1,3 +1,4 @@
+"use client";
 interface SettingsWrapperProps {
     gbAvailable: number;
     updateAvailable: (method: string) => void;
@@ -6,7 +7,13 @@ interface SettingsWrapperProps {
     setStartDate: (startDate: number) => void;
 }
 
-export default function SettingsWrapper({ gbAvailable, updateAvailable, setGbAvailable, startDate, setStartDate }: SettingsWrapperProps) {
+export default function SettingsWrapper({
+    gbAvailable,
+    updateAvailable,
+    setGbAvailable,
+    startDate,
+    setStartDate,
+}: SettingsWrapperProps) {
     function updateStartDate(event: React.ChangeEvent<HTMLInputElement>) {
         const updateDate = parseInt(event.target.value);
         if (updateDate < 1) {
@@ -27,9 +34,9 @@ export default function SettingsWrapper({ gbAvailable, updateAvailable, setGbAva
                             type={"number"}
                             value={gbAvailable}
                             className="w-24 px-2 mx-2 bg-gray-900 border-2 border-white rounded-lg"
-                            onChange={(e) => { 
-                                setGbAvailable(parseInt(e.target.value, 10)) 
-                                window.localStorage.setItem("gbAvailable", e.target.value)
+                            onChange={(e) => {
+                                setGbAvailable(parseInt(e.target.value, 10));
+                                window.localStorage.setItem("gbAvailable", e.target.value);
                             }}
                         />
                         GB

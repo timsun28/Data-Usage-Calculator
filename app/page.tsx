@@ -1,4 +1,7 @@
-import Head from "next/head";
+"use client"
+
+import '@/styles/globals.css'
+
 import { useEffect, useState } from "react";
 import SettingsButton from "../components/SettingsButton";
 import SettingsWrapper from "../components/SettingsWrapper";
@@ -61,13 +64,6 @@ export default function Home() {
     };
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <Head>
-                <title>Data Usage</title>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-                />
-            </Head>
             <SettingsButton />
             <SettingsWrapper
                 gbAvailable={gbAvailable}
