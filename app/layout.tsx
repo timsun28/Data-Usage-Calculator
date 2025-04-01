@@ -1,18 +1,50 @@
-import { Metadata } from 'next';
+import type { Metadata, Viewport } from "next";
+
+const APP_NAME = "Data Usage";
+const APP_DEFAULT_TITLE = "Data Usage";
+const APP_TITLE_TEMPLATE = "%s - Data Usage";
+const APP_DESCRIPTION = "Data Usage Tracker for Mobile Data";
 
 export const metadata: Metadata = {
-    title: 'Data Usage',
-    description: 'Data Usage Tracker for Mobile Data',
-    manifest: '/site.webmanifest',
-  }
+    applicationName: APP_NAME,
+    title: {
+        default: APP_DEFAULT_TITLE,
+        template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: "default",
+        title: APP_DEFAULT_TITLE,
+        // startUpImage: [],
+    },
+    formatDetection: {
+        telephone: false,
+    },
+    openGraph: {
+        type: "website",
+        siteName: APP_NAME,
+        title: {
+            default: APP_DEFAULT_TITLE,
+            template: APP_TITLE_TEMPLATE,
+        },
+        description: APP_DESCRIPTION,
+    },
+    twitter: {
+        card: "summary",
+        title: {
+            default: APP_DEFAULT_TITLE,
+            template: APP_TITLE_TEMPLATE,
+        },
+        description: APP_DESCRIPTION,
+    },
+};
 
-export default function RootLayout({
-    // Layouts must accept a children prop.
-    // This will be populated with nested layouts or pages
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+    themeColor: "#FFFFFF",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <body>{children}</body>
