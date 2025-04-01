@@ -75,7 +75,7 @@ export default function Home() {
                 <h1 className="flex flex-col text-6xl md:text-7xl ">
                     <div className="flex flex-col">
                         <span>You</span>
-                        <LineShadowText className="italic" shadowColor={"black"}>
+                        <LineShadowText className="italic text-8xl" shadowColor={"black"}>
                             should
                         </LineShadowText>
                         <span>have</span>
