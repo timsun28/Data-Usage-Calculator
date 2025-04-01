@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
+import { Montserrat } from "next/font/google";
+
 const APP_NAME = "Data Usage";
 const APP_DEFAULT_TITLE = "Data Usage";
 const APP_TITLE_TEMPLATE = "%s - Data Usage";
@@ -44,10 +46,12 @@ export const viewport: Viewport = {
     themeColor: "#FFFFFF",
 };
 
+const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body className={montserrat.className}>{children}</body>
         </html>
     );
 }

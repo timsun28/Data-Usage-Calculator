@@ -7,6 +7,7 @@ import SettingsButton from "@/components/SettingsButton";
 import { calculateDailyAllowance, calculateRemainingAllowance } from "@/utils/calculations";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { AuroraText } from "@/components/magicui/aurora-text";
+import { LineShadowText } from "@/components/magicui/line-shadow-text";
 
 export default function Home() {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -72,9 +73,13 @@ export default function Home() {
                 setRenewalDate={setRenewalDate}
             />
             <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white">
-                <h1 className="flex flex-col text-6xl font-bold md:text-7xl ">
+                <h1 className="flex flex-col text-6xl md:text-7xl ">
                     <div>
-                        You should have{" "}
+                        You{" "}
+                        <LineShadowText className="italic" shadowColor={"black"}>
+                            should
+                        </LineShadowText>{" "}
+                        have{" "}
                         <NumberTicker
                             value={remainingAllowance}
                             className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
