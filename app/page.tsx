@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import SettingsButton from "@/components/SettingsButton";
 import { calculateDailyAllowance, calculateRemainingAllowance } from "@/utils/calculations";
 import { NumberTicker } from "@/components/magicui/number-ticker";
+import { AuroraText } from "@/components/magicui/aurora-text";
 
 export default function Home() {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -74,21 +75,17 @@ export default function Home() {
                 <h1 className="flex flex-col text-6xl font-bold md:text-7xl dark:text-white">
                     <div>
                         You should have{" "}
-                        <span className="text-gradient first text-8xl">
-                            <NumberTicker
-                                value={remainingAllowance}
-                                className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
-                            />
-                        </span>{" "}
+                        <NumberTicker
+                            value={remainingAllowance}
+                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
+                        />{" "}
                         MB left with
                     </div>
                     <div>
-                        <span className="text-gradient second text-8xl">
-                            <NumberTicker
-                                value={dailyAllowance}
-                                className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
-                            />
-                        </span>{" "}
+                        <NumberTicker
+                            value={dailyAllowance}
+                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
+                        />{" "}
                         MB available per day
                     </div>
                 </h1>
