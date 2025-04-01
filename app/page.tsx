@@ -74,24 +74,26 @@ export default function Home() {
             />
             <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white">
                 <h1 className="flex flex-col text-6xl md:text-7xl ">
-                    <div>
-                        You{" "}
+                    <div className="flex flex-col">
+                        <span>You</span>
                         <LineShadowText className="italic" shadowColor={"black"}>
                             should
-                        </LineShadowText>{" "}
-                        have{" "}
+                        </LineShadowText>
+                        <span>have</span>
+                    </div>
+                    <div>
                         <NumberTicker
                             value={remainingAllowance}
                             className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
-                        />{" "}
-                        MB left with
+                        />
+                        <span>MB left with</span>
                     </div>
                     <div>
                         <NumberTicker
                             value={dailyAllowance}
                             className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
-                        />{" "}
-                        MB available per day
+                        />
+                        <span>MB available per day</span>
                     </div>
                 </h1>
             </main>
