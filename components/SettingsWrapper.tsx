@@ -1,63 +1,100 @@
 "use client";
+import React, { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+
 interface SettingsWrapperProps {
     gbAvailable: number;
     updateAvailable: (method: string) => void;
     setGbAvailable: (gbAvailable: number) => void;
-    startDate: number;
-    setStartDate: (startDate: number) => void;
+    renewalDate?: number;
+    setRenewalDate: (renewalDate?: number) => void;
 }
 
 export default function SettingsWrapper({
     gbAvailable,
     updateAvailable,
     setGbAvailable,
-    startDate,
-    setStartDate,
+    renewalDate,
+    setRenewalDate,
 }: SettingsWrapperProps) {
-    function updateStartDate(event: React.ChangeEvent<HTMLInputElement>) {
-        const updateDate = parseInt(event.target.value);
-        if (updateDate < 1) {
-            setStartDate(1);
-        } else if (updateDate > 31) {
-            setStartDate(31);
-        } else {
-            setStartDate(updateDate);
+    const [useCustomRenewal, setUseCustomRenewal] = useState(!!renewalDate);
+    const [inputValue, setInputValue] = useState(renewalDate?.toString() || "");
+
+    useEffect(() => {
+        if (!useCustomRenewal) {
+            setRenewalDate(undefined);
+            setInputValue("");
+            window.localStorage.removeItem("renewalDate");
+        } else if (!renewalDate) {
+            setRenewalDate(20);
+            setInputValue("20");
         }
+    }, [useCustomRenewal]);
+
+    function updateRenewalDate(event: React.ChangeEvent<HTMLInputElement>) {
+        const value = event.target.value;
+        setInputValue(value);
+
+        if (value === "") {
+            setRenewalDate(undefined);
+            window.localStorage.removeItem("renewalDate");
+            return;
+        }
+
+        const updateDate = parseInt(value);
+        if (isNaN(updateDate)) return;
+
+        if (updateDate < 1) {
+            setRenewalDate(1);
+            setInputValue("1");
+        } else if (updateDate > 31) {
+            setRenewalDate(31);
+            setInputValue("31");
+        } else {
+            setRenewalDate(updateDate);
+        }
+        window.localStorage.setItem("renewalDate", updateDate.toString());
     }
+
     return (
-        <div className="wrapper">
-            <div className="flex flex-col items-center justify-center h-full text-white bg-gray-900 gap-y-8">
-                <div className="flex items-center justify-center gap-8 text-4xl ">
-                    <span>
+        <div className="space-y-6">
+            <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                    <Label htmlFor="data" className="text-lg">
                         Data:
-                        <input
-                            type={"number"}
-                            value={gbAvailable}
-                            className="w-24 px-2 mx-2 bg-gray-900 border-2 border-white rounded-lg"
-                            onChange={(e) => {
-                                setGbAvailable(parseInt(e.target.value, 10));
-                                window.localStorage.setItem("gbAvailable", e.target.value);
-                            }}
-                        />
-                        GB
-                    </span>
-                    {/* <div className="flex flex-col gap-4">
-                        <span className="cursor-pointer chevron top" onClick={() => updateAvailable("up")}></span>
-                        <span
-                            className="cursor-pointer chevron bottom"
-                            onClick={() => updateAvailable("down")}
-                        ></span>
-                    </div> */}
-                </div>
-                {/* <span className="flex items-center justify-center text-4xl">
-                    Renewal day:
-                    <input
-                        type={"number"}
-                        value={startDate}
-                        className="w-24 px-2 mx-2 bg-gray-900 border-2 border-white rounded-lg"
-                        onChange={(e) => setStartDate(parseInt(e.target.value, 10))}
+                    </Label>
+                    <Input
+                        id="data"
+                        type="number"
+                        value={gbAvailable}
+                        className="w-24"
+                        onChange={(e) => {
+                            setGbAvailable(parseInt(e.target.value, 10));
+                            window.localStorage.setItem("gbAvailable", e.target.value);
+                        }}
                     />
-                </span> */}
+                    <span className="text-lg">GB</span>
+                </div>
+                <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
+                        <Switch id="custom-renewal" checked={useCustomRenewal} onCheckedChange={setUseCustomRenewal} />
+                        <Label htmlFor="custom-renewal" className="text-lg">
+                            Custom renewal day
+                        </Label>
+                    </div>
+                    {useCustomRenewal && (
+                        <Input
+                            type="number"
+                            value={inputValue}
+                            className="w-24"
+                            onChange={updateRenewalDate}
+                            min={1}
+                            max={31}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );

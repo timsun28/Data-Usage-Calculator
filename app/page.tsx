@@ -3,12 +3,21 @@
 import "@/styles/globals.css";
 
 import { useEffect, useState } from "react";
-import SettingsButton from "../components/SettingsButton";
-import SettingsWrapper from "../components/SettingsWrapper";
+import SettingsButton from "@/components/SettingsButton";
+import { calculateDailyAllowance, calculateRemainingAllowance } from "@/utils/calculations";
+import { NumberTicker } from "@/components/magicui/number-ticker";
 
 export default function Home() {
+    const [currentDate, setCurrentDate] = useState(new Date());
     const [gbAvailable, setGbAvailable] = useState(0);
-    const [startDate, setStartDate] = useState(1);
+    const [renewalDate, setRenewalDate] = useState<number | undefined>(undefined);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setCurrentDate(new Date());
+        }
+    }, []);
+
     useEffect(() => {
         if (typeof window !== "undefined") {
             const available = window.localStorage.getItem("gbAvailable");
@@ -19,36 +28,12 @@ export default function Home() {
                 setGbAvailable(40);
             }
 
-            const start = window.localStorage.getItem("startDate");
-            if (start) {
-                setStartDate(parseInt(start));
-            } else {
-                window.localStorage.setItem("startDate", "1");
-                setStartDate(1);
+            const renewal = window.localStorage.getItem("renewalDate");
+            if (renewal) {
+                setRenewalDate(parseInt(renewal));
             }
         }
     }, []);
-
-    const getRemainingData = () => {
-        const today = new Date();
-        const currentDate = today.getDate();
-        const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-        const mbAvailable = gbAvailable * 1000;
-        const mbPerDay = mbAvailable / lastDayOfMonth;
-        const mbLeft = Math.round(mbAvailable - mbPerDay * currentDate) || 0;
-        function numberWithCommas(x: number) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        }
-        return numberWithCommas(mbLeft);
-    };
-
-    const getPerDayData = () => {
-        const today = new Date();
-        const mbAvailable = gbAvailable * 1000;
-        const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-        const mbPerDay = mbAvailable / lastDayOfMonth;
-        return Math.round(mbPerDay);
-    };
 
     const updateAvailable = (method: string) => {
         if (method === "up") {
@@ -62,24 +47,49 @@ export default function Home() {
             window.localStorage.setItem("gbAvailable", (gbAvailable - 1).toString());
         }
     };
+
+    const dailyAllowance = calculateDailyAllowance({
+        totalPlanSizeGB: gbAvailable,
+        currentDate,
+        renewalDate,
+    });
+
+    const remainingAllowance = calculateRemainingAllowance({
+        totalPlanSizeGB: gbAvailable,
+        currentDate,
+        dailyAllowanceMB: dailyAllowance,
+        renewalDate,
+    });
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <SettingsButton />
-            <SettingsWrapper
+            <SettingsButton
                 gbAvailable={gbAvailable}
                 setGbAvailable={setGbAvailable}
                 updateAvailable={updateAvailable}
-                startDate={startDate}
-                setStartDate={setStartDate}
+                renewalDate={renewalDate}
+                setRenewalDate={setRenewalDate}
             />
             <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white dark:bg-gray-900">
                 <h1 className="flex flex-col text-6xl font-bold md:text-7xl dark:text-white">
                     <div>
-                        You should have <span className="text-gradient first text-8xl">{getRemainingData()}</span> MB
-                        left with
+                        You should have{" "}
+                        <span className="text-gradient first text-8xl">
+                            <NumberTicker
+                                value={remainingAllowance}
+                                className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
+                            />
+                        </span>{" "}
+                        MB left with
                     </div>
                     <div>
-                        <span className="text-gradient second text-8xl">{getPerDayData()}</span> MB available per day
+                        <span className="text-gradient second text-8xl">
+                            <NumberTicker
+                                value={dailyAllowance}
+                                className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
+                            />
+                        </span>{" "}
+                        MB available per day
                     </div>
                 </h1>
             </main>
