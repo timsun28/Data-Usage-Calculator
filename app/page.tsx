@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import SettingsButton from "@/components/SettingsButton";
 import { calculateDailyAllowance, calculateRemainingAllowance } from "@/utils/calculations";
 import { NumberTicker } from "@/components/magicui/number-ticker";
-import { AuroraText } from "@/components/magicui/aurora-text";
 import { LineShadowText } from "@/components/magicui/line-shadow-text";
 
 export default function Home() {
