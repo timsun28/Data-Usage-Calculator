@@ -31,8 +31,12 @@ export default function SettingsButton({
     return (
         <Drawer>
             <DrawerTrigger asChild>
-                <Button variant="outline" size="icon" className="fixed top-4 right-4">
-                    <Settings className="h-4 w-4" />
+                <Button
+                    variant="outline"
+                    size="icon"
+                    className="fixed top-6 right-6 bg-white/80 backdrop-blur-sm border-2 border-gray-200/50 shadow-lg hover:bg-white/90 transition-all duration-300 hover:scale-110 hover:shadow-xl rounded-full"
+                >
+                    <Settings className="h-5 w-5 text-gray-600" />
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
