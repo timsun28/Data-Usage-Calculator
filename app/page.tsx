@@ -71,20 +71,20 @@ export default function Home() {
                 renewalDate={renewalDate}
                 setRenewalDate={setRenewalDate}
             />
-            <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white dark:bg-gray-900">
-                <h1 className="flex flex-col text-6xl font-bold md:text-7xl dark:text-white">
+            <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white">
+                <h1 className="flex flex-col text-6xl font-bold md:text-7xl ">
                     <div>
                         You should have{" "}
                         <NumberTicker
                             value={remainingAllowance}
-                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
+                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
                         />{" "}
                         MB left with
                     </div>
                     <div>
                         <NumberTicker
                             value={dailyAllowance}
-                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
+                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
                         />{" "}
                         MB available per day
                     </div>
