@@ -1,28 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext",
-      "webworker"
+      "esnext"
     ],
-    "types": [
-      "@serwist/next/typings"
-    ],
-    "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
-    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
@@ -32,16 +26,17 @@
       "@/*": [
         "./*"
       ]
-    }
+    },
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "types/**/*.d.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "public/sw.js"
+    "node_modules"
   ]
 }

@@ -12,6 +12,7 @@ export default function Home() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [gbAvailable, setGbAvailable] = useState(0);
     const [renewalDate, setRenewalDate] = useState<number | undefined>(undefined);
+    const [displayMode, setDisplayMode] = useState<"remaining" | "used">("remaining");
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -32,6 +33,11 @@ export default function Home() {
             const renewal = window.localStorage.getItem("renewalDate");
             if (renewal) {
                 setRenewalDate(parseInt(renewal));
+            }
+
+            const mode = window.localStorage.getItem("displayMode");
+            if (mode === "used" || mode === "remaining") {
+                setDisplayMode(mode);
             }
         }
     }, []);
@@ -62,6 +68,8 @@ export default function Home() {
         renewalDate,
     });
 
+    const usedAllowance = gbAvailable * 1000 - remainingAllowance;
+
     return (
         <div className="flex flex-col items-center justify-center min-h-svh">
             <SettingsButton
@@ -70,22 +78,24 @@ export default function Home() {
                 updateAvailable={updateAvailable}
                 renewalDate={renewalDate}
                 setRenewalDate={setRenewalDate}
+                displayMode={displayMode}
+                setDisplayMode={setDisplayMode}
             />
             <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white">
                 <h1 className="flex flex-col text-6xl md:text-7xl ">
                     <div className="flex flex-col">
                         <span>You</span>
                         <LineShadowText className="italic text-8xl" shadowColor={"black"}>
-                            should
+                            {displayMode === "remaining" ? "should" : "could"}
                         </LineShadowText>
                         <span>have</span>
                     </div>
                     <div>
                         <NumberTicker
-                            value={remainingAllowance}
+                            value={displayMode === "remaining" ? remainingAllowance : usedAllowance}
                             className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
                         />
-                        <span>MB left with</span>
+                        <span>MB {displayMode === "remaining" ? "left with" : "used already with"}</span>
                     </div>
                     <div>
                         <NumberTicker

@@ -10,6 +10,8 @@ interface SettingsWrapperProps {
     setGbAvailable: (gbAvailable: number) => void;
     renewalDate?: number;
     setRenewalDate: (renewalDate?: number) => void;
+    displayMode: "remaining" | "used";
+    setDisplayMode: (mode: "remaining" | "used") => void;
 }
 
 export default function SettingsWrapper({
@@ -18,6 +20,8 @@ export default function SettingsWrapper({
     setGbAvailable,
     renewalDate,
     setRenewalDate,
+    displayMode,
+    setDisplayMode,
 }: SettingsWrapperProps) {
     const [useCustomRenewal, setUseCustomRenewal] = useState(!!renewalDate);
     const [inputValue, setInputValue] = useState(renewalDate?.toString() || "");
@@ -94,6 +98,22 @@ export default function SettingsWrapper({
                             max={31}
                         />
                     )}
+                </div>
+                <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
+                        <Switch
+                            id="display-mode"
+                            checked={displayMode === "used"}
+                            onCheckedChange={(checked) => {
+                                const newMode = checked ? "used" : "remaining";
+                                setDisplayMode(newMode);
+                                window.localStorage.setItem("displayMode", newMode);
+                            }}
+                        />
+                        <Label htmlFor="display-mode" className="text-lg">
+                            Show Used Amount
+                        </Label>
+                    </div>
                 </div>
             </div>
         </div>
