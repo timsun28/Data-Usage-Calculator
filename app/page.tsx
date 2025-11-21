@@ -88,14 +88,14 @@ export default function Home() {
                         <LineShadowText className="italic text-8xl" shadowColor={"black"}>
                             {displayMode === "remaining" ? "should" : "could"}
                         </LineShadowText>
-                        <span>have</span>
+                        <span>{displayMode === "remaining" ? "have" : "have used"}</span>
                     </div>
                     <div>
                         <NumberTicker
                             value={displayMode === "remaining" ? remainingAllowance : usedAllowance}
                             className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
                         />
-                        <span>MB {displayMode === "remaining" ? "left with" : "used already with"}</span>
+                        <span>MB {displayMode === "remaining" ? "left with" : "already with"}</span>
                     </div>
                     <div>
                         <NumberTicker
