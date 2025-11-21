@@ -1,7 +1,3 @@
-/** @type {import("next").NextConfig} */
-const nextConfig = {
-  basePath: "",
-  serverExternalPackages: ["esbuild-wasm"],
-};
+const nextConfig = {};
 
 export default nextConfig;
