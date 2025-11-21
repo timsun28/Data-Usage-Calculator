@@ -21,6 +21,8 @@ interface SettingsButtonProps {
     setRenewalDate: (renewalDate?: number) => void;
     displayMode: "remaining" | "used";
     setDisplayMode: (mode: "remaining" | "used") => void;
+    isPrettyMode: boolean;
+    setIsPrettyMode: (isPrettyMode: boolean) => void;
 }
 
 export default function SettingsButton({
@@ -31,6 +33,8 @@ export default function SettingsButton({
     setRenewalDate,
     displayMode,
     setDisplayMode,
+    isPrettyMode,
+    setIsPrettyMode,
 }: SettingsButtonProps) {
     return (
         <Drawer>
@@ -57,6 +61,8 @@ export default function SettingsButton({
                             setRenewalDate={setRenewalDate}
                             displayMode={displayMode}
                             setDisplayMode={setDisplayMode}
+                            isPrettyMode={isPrettyMode}
+                            setIsPrettyMode={setIsPrettyMode}
                         />
                     </div>
                     <DrawerFooter>

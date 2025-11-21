@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
-import { Montserrat } from "next/font/google";
+import { Montserrat, Dancing_Script } from "next/font/google";
 
 const APP_NAME = "Data Usage";
 const APP_DEFAULT_TITLE = "Data Usage";
@@ -47,11 +47,12 @@ export const viewport: Viewport = {
 };
 
 const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
+const dancingScript = Dancing_Script({ subsets: ["latin"], display: "swap", variable: "--font-dancing" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={montserrat.className}>{children}</body>
+            <body className={`${montserrat.className} ${dancingScript.variable}`}>{children}</body>
         </html>
     );
 }

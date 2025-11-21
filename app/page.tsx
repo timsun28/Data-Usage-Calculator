@@ -8,11 +8,15 @@ import { calculateDailyAllowance, calculateRemainingAllowance } from "@/utils/ca
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { LineShadowText } from "@/components/magicui/line-shadow-text";
 
+import PrettyView from "@/components/PrettyView";
+
 export default function Home() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [gbAvailable, setGbAvailable] = useState(0);
     const [renewalDate, setRenewalDate] = useState<number | undefined>(undefined);
     const [displayMode, setDisplayMode] = useState<"remaining" | "used">("remaining");
+
+    const [isPrettyMode, setIsPrettyMode] = useState(false);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -38,6 +42,11 @@ export default function Home() {
             const mode = window.localStorage.getItem("displayMode");
             if (mode === "used" || mode === "remaining") {
                 setDisplayMode(mode);
+            }
+
+            const pretty = window.localStorage.getItem("isPrettyMode");
+            if (pretty === "true") {
+                setIsPrettyMode(true);
             }
         }
     }, []);
@@ -71,7 +80,7 @@ export default function Home() {
     const usedAllowance = gbAvailable * 1000 - remainingAllowance;
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-svh">
+        <div className={`flex flex-col items-center justify-center min-h-svh ${isPrettyMode ? "pretty" : ""}`}>
             <SettingsButton
                 gbAvailable={gbAvailable}
                 setGbAvailable={setGbAvailable}
@@ -80,32 +89,43 @@ export default function Home() {
                 setRenewalDate={setRenewalDate}
                 displayMode={displayMode}
                 setDisplayMode={setDisplayMode}
+                isPrettyMode={isPrettyMode}
+                setIsPrettyMode={setIsPrettyMode}
             />
-            <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white">
-                <h1 className="flex flex-col text-6xl md:text-7xl ">
-                    <div className="flex flex-col">
-                        <span>You</span>
-                        <LineShadowText className="italic text-8xl" shadowColor={"black"}>
-                            {displayMode === "remaining" ? "should" : "could"}
-                        </LineShadowText>
-                        <span>{displayMode === "remaining" ? "have" : "have used"}</span>
-                    </div>
-                    <div>
-                        <NumberTicker
-                            value={displayMode === "remaining" ? remainingAllowance : usedAllowance}
-                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
-                        />
-                        <span>MB {displayMode === "remaining" ? "left with" : "already with"}</span>
-                    </div>
-                    <div>
-                        <NumberTicker
-                            value={dailyAllowance}
-                            className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
-                        />
-                        <span>MB available per day</span>
-                    </div>
-                </h1>
-            </main>
+            {isPrettyMode ? (
+                <PrettyView
+                    displayMode={displayMode}
+                    remainingAllowance={remainingAllowance}
+                    usedAllowance={usedAllowance}
+                    dailyAllowance={dailyAllowance}
+                />
+            ) : (
+                <main className="flex flex-col items-center justify-center flex-1 w-full px-4 bg-white">
+                    <h1 className="flex flex-col text-6xl md:text-7xl ">
+                        <div className="flex flex-col">
+                            <span>You</span>
+                            <LineShadowText className="italic text-8xl" shadowColor={"black"}>
+                                {displayMode === "remaining" ? "should" : "could"}
+                            </LineShadowText>
+                            <span>{displayMode === "remaining" ? "have" : "have used"}</span>
+                        </div>
+                        <div>
+                            <NumberTicker
+                                value={displayMode === "remaining" ? remainingAllowance : usedAllowance}
+                                className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
+                            />
+                            <span>MB {displayMode === "remaining" ? "left with" : "already with"}</span>
+                        </div>
+                        <div>
+                            <NumberTicker
+                                value={dailyAllowance}
+                                className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black "
+                            />
+                            <span>MB available per day</span>
+                        </div>
+                    </h1>
+                </main>
+            )}
         </div>
     );
 }

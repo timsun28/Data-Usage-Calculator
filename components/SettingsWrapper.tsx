@@ -12,6 +12,8 @@ interface SettingsWrapperProps {
     setRenewalDate: (renewalDate?: number) => void;
     displayMode: "remaining" | "used";
     setDisplayMode: (mode: "remaining" | "used") => void;
+    isPrettyMode: boolean;
+    setIsPrettyMode: (isPrettyMode: boolean) => void;
 }
 
 export default function SettingsWrapper({
@@ -22,6 +24,8 @@ export default function SettingsWrapper({
     setRenewalDate,
     displayMode,
     setDisplayMode,
+    isPrettyMode,
+    setIsPrettyMode,
 }: SettingsWrapperProps) {
     const [useCustomRenewal, setUseCustomRenewal] = useState(!!renewalDate);
     const [inputValue, setInputValue] = useState(renewalDate?.toString() || "");
@@ -112,6 +116,21 @@ export default function SettingsWrapper({
                         />
                         <Label htmlFor="display-mode" className="text-lg">
                             Show Used Amount
+                        </Label>
+                    </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
+                        <Switch
+                            id="pretty-mode"
+                            checked={isPrettyMode}
+                            onCheckedChange={(checked) => {
+                                setIsPrettyMode(checked);
+                                window.localStorage.setItem("isPrettyMode", checked.toString());
+                            }}
+                        />
+                        <Label htmlFor="pretty-mode" className="text-lg">
+                            Pretty Mode 🌸
                         </Label>
                     </div>
                 </div>

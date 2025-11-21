@@ -125,3 +125,48 @@
     @apply bg-background text-foreground;
     }
 }
+
+.pretty {
+    --background: oklch(0.98 0.01 340);
+    --foreground: oklch(0.3 0.1 340);
+    --card: oklch(1 0 0 / 0.4);
+    --card-foreground: oklch(0.3 0.1 340);
+    --popover: oklch(1 0 0 / 0.8);
+    --popover-foreground: oklch(0.3 0.1 340);
+    --primary: oklch(0.7 0.2 340);
+    --primary-foreground: oklch(0.99 0.005 340);
+    --secondary: oklch(0.95 0.05 340);
+    --secondary-foreground: oklch(0.7 0.2 340);
+    --muted: oklch(0.95 0.02 340);
+    --muted-foreground: oklch(0.5 0.1 340);
+    --accent: oklch(0.95 0.05 340);
+    --accent-foreground: oklch(0.7 0.2 340);
+    --destructive: oklch(0.6 0.2 20);
+    --border: oklch(1 0 0 / 0.2);
+    --input: oklch(1 0 0 / 0.2);
+    --ring: oklch(0.7 0.2 340);
+    --radius: 1.5rem;
+
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 25%, #fbcfe8 50%, #f9a8d4 75%, #f472b6 100%);
+    background-size: 400% 400%;
+    animation: gradient-animation 15s ease infinite;
+}
+
+.pretty .bg-white {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
